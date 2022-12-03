@@ -1,4 +1,5 @@
 import { NumberTypes } from "Meta/DBTSchema.tyeps";
+export declare const NumberTypeRecord: Record<NumberTypes, number>;
 export declare const DBTUtil: {
     setTypedNumber(data: DataView, index: number, byteSize: number, value: number): void;
     getTypedNumber(data: DataView, index: number, byteSize: number): number;

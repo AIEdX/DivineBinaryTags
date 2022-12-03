@@ -7,7 +7,7 @@ import {
   DBTTagNodes,
 } from "./Meta/DBTSchema.tyeps";
 import { RemoteTagManagerInitData } from "./Meta/Util.types.js";
-import { DBTUtil } from "./Util/DBTUtil.js";
+import { DBTUtil, NumberTypeRecord } from "./Util/DBTUtil.js";
 import { TagManagerBase } from "./Classes/TagManagerBase.js";
 
 const TagNodeTypes = {
@@ -44,14 +44,14 @@ const setIndexData = (
 export class TagManager extends TagManagerBase {
   schema: DBTSchema = new Map();
 
-  constructor(public id : string) {
+  constructor(public id: string) {
     super(id);
   }
 
   registerTag(tagData: DBTTagNodes) {
     this.schema.set(tagData.id, tagData);
   }
-  $INIT(initData?: TagManagerInitData) :RemoteTagManagerInitData {
+  $INIT(initData?: TagManagerInitData): RemoteTagManagerInitData {
     //process schema
     const booleans: DBTBooleanTag[] = [];
     const numbers: DBTNumberTag[][] = [];
@@ -68,7 +68,6 @@ export class TagManager extends TagManagerBase {
         numbers[bitSize].push(tag);
       }
       if (tag.type == "typed-number") {
-        const type = (tag as DBTTypedNumberTag).numberType;
         let tags = typedNumbers.get(tag.numberType);
         if (!tags) {
           tags = [];
@@ -109,12 +108,14 @@ export class TagManager extends TagManagerBase {
         bitIndex = 0;
       }
     }
+    byteIndex++;
     bitIndex = 0;
     let cachedBitSize = 0;
     numbers.forEach((tags, bitS) => {
       bitSize = bitS;
       if (cachedBitSize != bitSize) {
         byteIndex++;
+        bitIndex = 0;
       }
       for (let i = 0; i < tags.length; i++) {
         const tag = tags[i];
@@ -136,9 +137,9 @@ export class TagManager extends TagManagerBase {
     });
 
     bitIndex = 0;
+    byteIndex++;
     typedNumbers.forEach((tags, type) => {
       const byteSise = DBTUtil.getNumberTypesize(type);
-      bitSize = byteSise * 8;
       for (let i = 0; i < tags.length; i++) {
         const tag = tags[i];
         this.indexMap.set(tag.id, indexBufferIndex);
@@ -146,11 +147,10 @@ export class TagManager extends TagManagerBase {
           index,
           indexBufferIndex,
           byteIndex,
-          bitIndex,
-          byteSise,
+          0,
+          NumberTypeRecord[tag.numberType],
           TagNodeTypes.typedNumber
         );
-        bitIndex += bitSize;
         byteIndex += byteSise;
       }
     });
@@ -162,11 +162,11 @@ export class TagManager extends TagManagerBase {
     this.tagSize = byteIndex;
     return {
       bufferSize: byteIndex * numberOfIndexes,
-      buffer : new ArrayBuffer(0),
-      indexBuffer : indexBuffer,
-      indexMap : this.indexMap,
-      tagSize : this.tagSize,
-      totalIndexes : numberOfIndexes
+      buffer: new ArrayBuffer(0),
+      indexBuffer: indexBuffer,
+      indexMap: this.indexMap,
+      tagSize: this.tagSize,
+      totalIndexes: numberOfIndexes,
     };
   }
 }

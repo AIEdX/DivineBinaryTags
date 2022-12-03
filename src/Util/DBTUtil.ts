@@ -13,10 +13,25 @@ const NumberTypeByteSize: Record<NumberTypes, number> = {
   "64ui": 8,
 };
 
-const NumberTypeBytes: NumberTypes[] = [];
-for (const key of Object.keys(NumberTypeByteSize)) {
+export const NumberTypeRecord: Record<NumberTypes, number> = {
+  "8ui": 0,
+  "8i": 1,
+  "16ui": 2,
+  "16i": 3,
+  "32ui": 4,
+  "32i": 5,
+  "32f": 6,
+  "64f": 7,
+  "64i": 8,
+  "64ui": 9,
+};
+
+
+ const NumberTypeMap: Record<number, NumberTypes> = {
+};
+for (const key of Object.keys(NumberTypeRecord)) {
   //@ts-ignore
-  NumberTypeBytes[Number(NumberTypeByteSize[key])] = key;
+  NumberTypeMap[Number(NumberTypeRecord[key])] = key;
 }
 const TypedNumberSetFunctions: Record<
   NumberTypes,
@@ -97,10 +112,10 @@ export const DBTUtil = {
     byteSize: number,
     value: number
   ) {
-    TypedNumberSetFunctions[NumberTypeBytes[byteSize]](data, index, value);
+    TypedNumberSetFunctions[NumberTypeMap[byteSize]](data, index, value);
   },
   getTypedNumber(data: DataView, index: number, byteSize: number) {
-    return TypedNumberGetFunctions[NumberTypeBytes[byteSize]](data, index);
+    return TypedNumberGetFunctions[NumberTypeMap[byteSize]](data, index);
   },
   calculateBitsNeeded(min: number, max: number) {
     let range = max - min;

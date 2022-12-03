@@ -10,10 +10,22 @@ const NumberTypeByteSize = {
     "64i": 8,
     "64ui": 8,
 };
-const NumberTypeBytes = [];
-for (const key of Object.keys(NumberTypeByteSize)) {
+export const NumberTypeRecord = {
+    "8ui": 0,
+    "8i": 1,
+    "16ui": 2,
+    "16i": 3,
+    "32ui": 4,
+    "32i": 5,
+    "32f": 6,
+    "64f": 7,
+    "64i": 8,
+    "64ui": 9,
+};
+const NumberTypeMap = {};
+for (const key of Object.keys(NumberTypeRecord)) {
     //@ts-ignore
-    NumberTypeBytes[Number(NumberTypeByteSize[key])] = key;
+    NumberTypeMap[Number(NumberTypeRecord[key])] = key;
 }
 const TypedNumberSetFunctions = {
     "8ui": (data, index, value) => {
@@ -81,10 +93,10 @@ const TypedNumberGetFunctions = {
 };
 export const DBTUtil = {
     setTypedNumber(data, index, byteSize, value) {
-        TypedNumberSetFunctions[NumberTypeBytes[byteSize]](data, index, value);
+        TypedNumberSetFunctions[NumberTypeMap[byteSize]](data, index, value);
     },
     getTypedNumber(data, index, byteSize) {
-        return TypedNumberGetFunctions[NumberTypeBytes[byteSize]](data, index);
+        return TypedNumberGetFunctions[NumberTypeMap[byteSize]](data, index);
     },
     calculateBitsNeeded(min, max) {
         let range = max - min;

@@ -11,5 +11,6 @@ export class RemoteTagManager extends TagManagerBase {
     this.indexMap = data.indexMap;
     this.tagIndexes = data.totalIndexes;
     this.tagSize = data.tagSize;
+
   }
 }

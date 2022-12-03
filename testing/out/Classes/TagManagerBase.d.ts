@@ -1,4 +1,4 @@
-import { BufferTypes } from "Meta/Util.types.js";
+import { BufferTypes } from "../Meta/Util.types.js";
 export declare class TagManagerBase {
     id: string;
     byteOffSet: number;

@@ -1,5 +1,5 @@
-import { DBTSchema, DBTTagNodes } from "Meta/DBTSchema.tyeps";
-import { RemoteTagManagerInitData } from "Meta/Util.types.js";
+import { DBTSchema, DBTTagNodes } from "./Meta/DBTSchema.tyeps";
+import { RemoteTagManagerInitData } from "./Meta/Util.types.js";
 import { TagManagerBase } from "./Classes/TagManagerBase.js";
 declare type TagManagerInitData = {
     indexBufferMode?: "normal" | "shared";

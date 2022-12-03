@@ -39,13 +39,9 @@ export class TagManagerBase {
             throw new Error(`Tag with id: ${id} does not exist.`);
         }
         const indexData = getIndexData(this.index, byteIndex);
-        if (indexData[3] == TagNodeTypes.boolean) {
-            const byte = this.data.getUint8(indexData[0] + this.byteOffSet);
-            return DBTUtil.getValue(byte, indexData[1], indexData[2]);
-        }
-        if (indexData[3] == TagNodeTypes.number) {
-            const byte = this.data.getUint8(indexData[0] + this.byteOffSet);
-            return DBTUtil.getValue(byte, indexData[1], indexData[2]);
+        if (indexData[3] == TagNodeTypes.boolean ||
+            indexData[3] == TagNodeTypes.number) {
+            return DBTUtil.getValue(this.data.getUint8(indexData[0] + this.byteOffSet), indexData[1], indexData[2]);
         }
         if (indexData[3] == TagNodeTypes.typedNumber) {
             return DBTUtil.getTypedNumber(this.data, indexData[0] + this.byteOffSet, indexData[2]);
