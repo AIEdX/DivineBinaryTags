@@ -1,4 +1,4 @@
-import { BufferTypes } from "Meta/Util.types.js";
+import { BufferTypes } from "../Meta/Util.types.js";
 import { DBTUtil } from "../Util/DBTUtil.js";
 
 const TagNodeTypes = {

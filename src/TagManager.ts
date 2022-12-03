@@ -5,8 +5,8 @@ import {
   NumberTypes,
   DBTSchema,
   DBTTagNodes,
-} from "Meta/DBTSchema.tyeps";
-import { RemoteTagManagerInitData } from "Meta/Util.types.js";
+} from "./Meta/DBTSchema.tyeps";
+import { RemoteTagManagerInitData } from "./Meta/Util.types.js";
 import { DBTUtil } from "./Util/DBTUtil.js";
 import { TagManagerBase } from "./Classes/TagManagerBase.js";
 
