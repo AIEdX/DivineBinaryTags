@@ -12,8 +12,8 @@
 Divine Binary Tag is a library that allows you to use an ArrayBuffer as a tag register. 
 
 ```ts
-import { TagManager } from "../out/TagManager.js";
-import { RemoteTagManager } from "../out/RemoteTagManager.js";
+import { TagManager } from "divineBinaryTags/TagManager.js";
+import { RemoteTagManager } from "divineBinaryTags/RemoteTagManager.js";
 const manager = new TagManager("main");
 manager.registerTag({ id: "#dbt:bool1", type: "boolean" });
 manager.registerTag({ id: "#dbt:bool2", type: "boolean" });
