@@ -11,13 +11,10 @@
 
 Divine Binary Tag is a library that allows you to use an ArrayBuffer as a tag register. 
 
-
-
-
 ```ts
-import { DivineBinaryTags as DBT } from "../out/DivineBinaryTags.js";
-
-const manager = DBT.createTagManager("main");
+import { TagManager } from "../out/TagManager.js";
+import { RemoteTagManager } from "../out/RemoteTagManager.js";
+const manager = new TagManager("main");
 manager.registerTag({ id: "#dbt:bool1", type: "boolean" });
 manager.registerTag({ id: "#dbt:bool2", type: "boolean" });
 manager.registerTag({ id: "#dbt:num1", type: "number", range: [0, 15] });
@@ -42,19 +39,18 @@ manager.loopThroughAllIndexTags(() => {
   manager.setTag("#dbt:tnum1", (Math.random() * 10_000) >> 0);
 });
 
-console.log("[MAIN]")
+console.log("[MAIN]");
 manager.loopThroughAllIndexTags((id, value, index) => {
   console.log([index], id, "=>", value);
 });
 
-const remoteManager = DBT.createRemoteTagManager("second");
+const remoteManager = new RemoteTagManager("remote");
 
 remoteManager.$INIT(data);
-console.log("[REMOTE]")
+console.log("[REMOTE]");
 remoteManager.loopThroughAllIndexTags((id, value, index) => {
   console.log([index], id, "=>", value);
 });
-
 ```
 
 
