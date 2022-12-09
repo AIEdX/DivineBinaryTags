@@ -14,21 +14,36 @@ export type NumberTypes =
 export type DBTBooleanTag = {
   id: string;
   type: "boolean";
-  defaultValue?: boolean;
 };
 export type DBTNumberTag = {
   id: string;
   type: "number";
   range: [min: number, max: number];
-  defaultValue?: number;
 };
 export type DBTTypedNumberTag = {
   id: string;
   type: "typed-number";
   numberType: NumberTypes;
-  defaultValue?: number;
+};
+export type DBTTypedNumberArrayTag = {
+  id: string;
+  type: "typed-number-array";
+  numberType: NumberTypes;
+  length: number;
 };
 
-export type DBTTagNodes = DBTBooleanTag | DBTNumberTag | DBTTypedNumberTag;
+export type DBTHeaderTag = {
+  id: string;
+  type: "header";
+  numberType: NumberTypes;
+};
+
+
+export type DBTTagNodes =
+  | DBTBooleanTag
+  | DBTNumberTag
+  | DBTTypedNumberTag
+  | DBTTypedNumberArrayTag
+  | DBTHeaderTag;
 
 export type DBTSchema = Map<string, DBTTagNodes>;

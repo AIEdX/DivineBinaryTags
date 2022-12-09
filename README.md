@@ -11,19 +11,35 @@
 
 Divine Binary Tag is a library that allows you to use an ArrayBuffer as a tag register. 
 
+
+### Example Code
+
 ```ts
-import { TagManager } from "divineBinaryTags/TagManager.js";
-import { RemoteTagManager } from "divineBinaryTags/RemoteTagManager.js";
+import { TagManager } from "../out/TagManager.js";
+import { RemoteTagManager } from "../out/RemoteTagManager.js";
 const manager = new TagManager("main");
+manager.registerTag({
+  id: "#dbt:tnum1",
+  type: "typed-number",
+  numberType: "8ui",
+});
+manager.registerTag({
+  id: "#dbt:tnum2",
+  type: "typed-number",
+  numberType: "32ui",
+});
+manager.registerTag({
+  id: "#dbt:num-array",
+  type: "typed-number-array",
+  numberType: "8ui",
+  length: 10,
+});
+
 manager.registerTag({ id: "#dbt:bool1", type: "boolean" });
 manager.registerTag({ id: "#dbt:bool2", type: "boolean" });
 manager.registerTag({ id: "#dbt:num1", type: "number", range: [0, 15] });
 manager.registerTag({ id: "#dbt:num2", type: "number", range: [0, 15] });
-manager.registerTag({
-  id: "#dbt:tnum1",
-  type: "typed-number",
-  numberType: "32ui",
-});
+
 const numIndexes = 3;
 const data = manager.$INIT({ numberOfIndexes: numIndexes });
 
@@ -36,7 +52,8 @@ manager.setTag("#dbt:num1", 15);
 manager.setTag("#dbt:tnum1", 16_000);
 
 manager.loopThroughAllIndexTags(() => {
-  manager.setTag("#dbt:tnum1", (Math.random() * 10_000) >> 0);
+  manager.setTag("#dbt:tnum1", (Math.random() * 255) >> 0);
+  manager.setTag("#dbt:tnum2", (Math.random() * 10_000) >> 0);
 });
 
 console.log("[MAIN]");
@@ -51,8 +68,15 @@ console.log("[REMOTE]");
 remoteManager.loopThroughAllIndexTags((id, value, index) => {
   console.log([index], id, "=>", value);
 });
+
+manager.setArrayTagValue("#dbt:num-array", 0, 2);
+manager.setArrayTagValue("#dbt:num-array", 1, 10);
+console.log(manager.getArrayTagValue("#dbt:num-array", 0));
+console.log(manager.getArrayTagValue("#dbt:num-array", 1));
 ```
 
+
+#### Output
 
 ```console
 [MAIN]
@@ -87,4 +111,6 @@ remoteManager.loopThroughAllIndexTags((id, value, index) => {
 [ 2 ] #dbt:num1 => 0
 [ 2 ] #dbt:num2 => 0
 [ 2 ] #dbt:tnum1 => 6497
+2
+10
 ```
