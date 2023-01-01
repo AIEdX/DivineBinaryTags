@@ -1,7 +1,7 @@
 {
   "sources": [
     {
-      "dir": "D:/DSSoftware/DSLIBS/divineBinaryTags/out",
+      "dir": "D:/DSSoftware/DSLIBS/divineBinaryTags/dist",
       "fileExtensions": [
         "js",
         "d.ts"
