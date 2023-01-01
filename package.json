@@ -1,10 +1,10 @@
 {
   "name": "divine-binary-tags",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A TypeScript library working with binary data.",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/DivineBinaryTags.js",
+  "types": "dist/DivineBinaryTags.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
