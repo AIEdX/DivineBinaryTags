@@ -13,6 +13,13 @@ export declare class TagManagerBase {
     getTag(id: string): number;
     setTag(id: string, value: number): boolean;
     getArrayTagValue(id: string, index: number): number;
+    /**## getArrayTagByteIndex
+     *  Get the actual byte index for the provided index of the array.
+     * @param id
+     * @param index
+     * @returns
+     */
+    getArrayTagByteIndex(id: string, index: number): number;
     setArrayTagValue(id: string, index: number, value: number): number | void;
     loopThroughTags(run: (id: string, value: number) => void): void;
     loopThroughIndex(run: (data: number[]) => void): void;
