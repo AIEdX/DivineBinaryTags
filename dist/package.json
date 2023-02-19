@@ -1,0 +1,17 @@
+{
+  "name": "divine-binary-tags",
+  "version": "0.0.4",
+  "description": "A TypeScript library working with binary data.",
+  "type": "module",
+  "main": "dist/DivineBinaryTags.js",
+  "types": "dist/DivineBinaryTags.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "url": "https://github.com/Divine-Star-Software/DivineBinaryTags"
+  },
+  "homepage": "https://github.com/Divine-Star-Software/DivineBinaryTags",
+  "author": "Divine Star Software",
+  "license": "MIT"
+}

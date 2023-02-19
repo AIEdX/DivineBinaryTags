@@ -1,4 +1,4 @@
-import { BufferTypes } from "../Meta/Util.types.js";
+import { BufferTypes } from "../Types/Util.types.js";
 import { DBTUtil, NumberTypeMap, TagNodeTypes } from "../Util/DBTUtil.js";
 
 const TagIndexData: [
@@ -39,6 +39,13 @@ export class TagManagerBase {
       return;
     }
     this.data = new DataView(data);
+  }
+
+  getBuffer() {
+    if (this.data instanceof DataView) {
+      return this.data.buffer;
+    }
+    return this.data;
   }
 
   setTagIndex(index: number) {

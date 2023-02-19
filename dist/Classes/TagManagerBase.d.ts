@@ -1,4 +1,4 @@
-import { BufferTypes } from "../Meta/Util.types.js";
+import { BufferTypes } from "../Types/Util.types.js";
 export declare class TagManagerBase {
     id: string;
     byteOffSet: number;
@@ -9,6 +9,7 @@ export declare class TagManagerBase {
     index: DataView;
     constructor(id: string);
     setBuffer(data: BufferTypes | DataView): void;
+    getBuffer(): ArrayBuffer;
     setTagIndex(index: number): void;
     getTag(id: string): number;
     setTag(id: string, value: number): boolean;
