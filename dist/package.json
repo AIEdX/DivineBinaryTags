@@ -3,8 +3,8 @@
   "version": "0.0.4",
   "description": "A TypeScript library working with binary data.",
   "type": "module",
-  "main": "dist/DivineBinaryTags.js",
-  "types": "dist/DivineBinaryTags.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
