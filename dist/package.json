@@ -1,6 +1,6 @@
 {
   "name": "divine-binary-tags",
-  "version": "0.0.4",
+  "version": "0.0.61",
   "description": "A TypeScript library working with binary data.",
   "type": "module",
   "main": "index.js",
